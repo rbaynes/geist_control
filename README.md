@@ -5,7 +5,7 @@ Python script to control an IP addressable power strip via REST
 
 ## Issues 
 - Geists API authentication scheme is stupid, since you have to send your username and password as plain text to get an authentication token. Duh.
-- The documentation sucks. They could have very simply shown 5 example curl commands and you would understand their whole API.
+- The documentation sucks. They could have simply shown 4 example curl commands and you would understand their whole API.
 
 ## Command line examples
 #### Get the device ID: 
