@@ -8,13 +8,18 @@ Python script to control an IP addressable power strip via REST
 - The documentation sucks. They could have very simply shown 5 example curl commands and you would understand their whole API.
 
 ## Command line examples
-* Get the device ID: 
-  * `curl -H "Content-Type:application/json" http://192.168.1.10/api/dev`
-  * Look for the first number returned in the **data {}** block, e.g. `FEE669E8851900C3`
+#### Get the device ID: 
+`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev`
+Look for the first number returned in the data:
+```json
+{
+    "data": {
+        "FEE669E8851900C3": {
+```
   
-* Login (using admin / admin as the credentials): 
-  * `curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/auth/admin --data '{"token":"","cmd":"login","data":{"password":"admin"}}'`
-  * Look for **token** in the response: 
+#### Login (using admin / admin as the credentials): 
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/auth/admin --data '{"token":"","cmd":"login","data":{"password":"admin"}}'`
+Look for **token** in the response: 
 ```json
 {
     "data": {
@@ -28,8 +33,8 @@ Python script to control an IP addressable power strip via REST
 }
 ```
 
-* Get the state of an outlet [the '0' is the outlet number (0-3)]:
-  * `curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/state --data '{"token":"a67edf14","cmd":"get","data":{}}'`
+#### Get the state of an outlet [the '0' is the outlet number (0-3)]:
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/state --data '{"token":"a67edf14","cmd":"get","data":{}}'`
 ```json
 {
     "data": "off",
@@ -38,4 +43,6 @@ Python script to control an IP addressable power strip via REST
 } 
 ```
 
-* finish this rob...
+#### Switch an outlet on or off [set the **action** to on/off/reboot]:
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0 --data '{"token":"a67edf14","cmd":"control","data":{"action":"on"}}'`
+
