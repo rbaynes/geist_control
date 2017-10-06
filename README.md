@@ -4,8 +4,8 @@ Python script to control an IP addressable power strip via REST
 [Geist RDU-0D four outlet current monitoring IP addressable power strip manual](http://www.geistglobal.com/sites/all/files/site/User_Manuals/Power/gm1174_-_r-series_v4_pdu_rev3.0.pdf)
 
 ## Issues 
-- Geists API authentication scheme is stupid, since you have to send your username and password as plain text to get an authentication token. Duh.
-- The documentation stinks. They could have simply shown 4 example curl commands and you would understand their whole API.
+- Geists API authentication scheme is not secure.  You have to send your username and password in plain text to get an authentication token.
+- The API documentation is unclear and confusing.  They should show some example curl commands (like below).
 
 ## Command line examples
 #### Get the device ID: 
