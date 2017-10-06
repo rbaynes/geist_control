@@ -84,7 +84,8 @@ def getDID( IP ):
     resp = get( IP, '/api/dev' )
     rdata = resp['data']
     dkeys = rdata.keys()
-    did = dkeys[0]
+    keyList = list( dkeys )
+    did = keyList[0]
     return did
 
 
