@@ -46,3 +46,14 @@ Look for **token** in the response:
 #### Switch an outlet on or off [set the **action** to on/off/reboot]:
 `curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0 --data '{"token":"a67edf14","cmd":"control","data":{"action":"on"}}'`
 
+#### Get the name for outlet zero:
+`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/label`
+```json
+{"retCode":0,"retMsg":"OK","data":"Alpha-bot"}
+```
+
+#### Get the wattage used by outlet zero:
+`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/measurement/3/value`
+```json
+{"retCode":0,"retMsg":"OK","data":"23"}
+```
