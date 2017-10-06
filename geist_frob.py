@@ -3,6 +3,10 @@
 # rbaynes 2017-10-03  
 # Script to control a Geist IP addressable power strip using its 
 # REST JSON API.
+#
+# Installation:
+# 1. sudo apt-get install -y python3.5
+# 2. sudo pip install requests
 # 
 # http://www.geistglobal.com/sites/all/files/site/User_Manuals/Power/gm1174_-_r-series_v4_pdu_rev3.0.pdf
 #
