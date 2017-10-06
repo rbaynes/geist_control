@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # rbaynes 2017-10-03  
 # Script to control a Geist IP addressable power strip using its 
