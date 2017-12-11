@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
 # rbaynes 2017-10-03  
-# Script to control a Geist IP addressable power strip using its 
-# REST JSON API.
+# Script to get the average wattage used by an outlet on a Geist IP addressable 
+# power strip using its REST JSON API.
 #
 # Installation:
 #   sudo apt-get install -y python3
@@ -16,7 +16,7 @@
 # https://wiki.openag.media.mit.edu/users/rbaynes/notes/geistpdu
 #
 import sys, os, getopt, argparse
-from func_lib import log, get, getDID, post, login, outlet
+from func_lib import log, get, getDID, post, get_watts
 
 
 #------------------------------------------------------------------------------
@@ -29,12 +29,6 @@ def main():
                         help='IP address of strip')
     parser.add_argument('--outlet', required=True, type=str, \
                         help='Outlet number 1-4')
-    parser.add_argument('--action', required=True, type=str, \
-                        help='Action: on/off/reboot')
-    parser.add_argument('--username', type=str, default='admin', \
-                        help='Default username is "admin"')
-    parser.add_argument('--password', type=str, default='admin', \
-                        help='Default password is "admin"')
     parser.add_argument('--debug', dest='debug', \
                         action='store_true', help='enable debug logging')
     args = parser.parse_args()
@@ -47,20 +41,16 @@ def main():
     # We take as input 1-4, so validate and convert
     if args.outlet not in ['1', '2', '3', '4']:
         log.fatal( "--outlet valid values are 1-4" )
-    args.outlet = str( int( args.outlet ) - 1 )
+    outlet = str( int( args.outlet ) - 1 )
 
     # automatically get device ID
     log.debug( "Getting device ID..." )
     DID = getDID( args.IP )
     log.debug( "DID=%s" % DID)
 
-    # login and get auth token
-    log.debug( "Logging in to get auth token..." )
-    AuthToken = login( args.IP, args.username, args.password )
-    log.debug( "AuthToken=%s" % AuthToken)
-
     # finally, do what the user wants.
-    outlet( args.IP, DID, AuthToken, args.outlet, args.action )
+    watts = get_watts( args.IP, DID, outlet )
+    print( "Outlet %s is using %s watts." % ( args.outlet, watts['data'] ))
 
 
 #------------------------------------------------------------------------------

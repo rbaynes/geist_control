@@ -19,8 +19,14 @@ pip install requests
 - The API documentation is unclear and confusing.  They should show some example curl commands (like below).
 
 ## Command line examples
+- `./geist_frob.py -h`
+- `./geist_frob.py --IP 192.168.1.11 --outlet 4 --action reboot`
+- `./geist_wattage.py --IP 192.168.1.11 --outlet 4`
+
+
+## CURL hacks to figure out the Geist REST API
 #### Get the device ID: 
-`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev`
+`curl -H "Content-Type:application/json" http://192.168.1.11/api/dev`
 Look for the first number returned in the data:
 ```json
 {
@@ -29,7 +35,7 @@ Look for the first number returned in the data:
 ```
   
 #### Login (using admin / admin as the credentials): 
-`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/auth/admin --data '{"token":"","cmd":"login","data":{"password":"admin"}}'`
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.11/api/auth/admin --data '{"token":"","cmd":"login","data":{"password":"admin"}}'`
 Look for **token** in the response: 
 ```json
 {
@@ -45,7 +51,7 @@ Look for **token** in the response:
 ```
 
 #### Get the state of an outlet [the '0' is the outlet number (0-3)]:
-`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/state --data '{"token":"a67edf14","cmd":"get","data":{}}'`
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.11/api/dev/FEE669E8851900C3/outlet/0/state --data '{"token":"a67edf14","cmd":"get","data":{}}'`
 ```json
 {
     "data": "off",
@@ -55,16 +61,16 @@ Look for **token** in the response:
 ```
 
 #### Switch an outlet on or off [set the **action** to on/off/reboot]:
-`curl -X POST -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0 --data '{"token":"a67edf14","cmd":"control","data":{"action":"on"}}'`
+`curl -X POST -H "Content-Type:application/json" http://192.168.1.11/api/dev/FEE669E8851900C3/outlet/0 --data '{"token":"a67edf14","cmd":"control","data":{"action":"on"}}'`
 
 #### Get the name for outlet zero:
-`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/label`
+`curl -H "Content-Type:application/json" http://192.168.1.11/api/dev/FEE669E8851900C3/outlet/0/label`
 ```json
 {"retCode":0,"retMsg":"OK","data":"Alpha-bot"}
 ```
 
 #### Get the wattage used by outlet zero:
-`curl -H "Content-Type:application/json" http://192.168.1.10/api/dev/FEE669E8851900C3/outlet/0/measurement/3/value`
+`curl -H "Content-Type:application/json" http://192.168.1.11/api/dev/FEE669E8851900C3/outlet/0/measurement/3/value`
 ```json
 {"retCode":0,"retMsg":"OK","data":"23"}
 ```
