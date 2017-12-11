@@ -4,8 +4,13 @@ Python script to control an IP addressable power strip via REST
 [Geist RDU-0D four outlet current monitoring IP addressable power strip manual](http://www.geistglobal.com/sites/all/files/site/User_Manuals/Power/gm1174_-_r-series_v4_pdu_rev3.0.pdf)
 
 ## Install
-- `sudo apt-get install -y python3.5`
-- `sudo pip install requests`
+```
+sudo apt-get install -y python3
+pip install --upgrade virtualenv
+virtualenv --python python3 env
+source env/bin/activate
+pip install requests
+```
 - Download and run the [geist_frob.py](geist_frob.py) script.
 
 
