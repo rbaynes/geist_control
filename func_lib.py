@@ -104,6 +104,16 @@ def login( IP, username, password ):
 
 
 #------------------------------------------------------------------------------
+# Outlet control
+def outlet( IP, DID, AuthToken, outlet, action ):
+    log.debug( "Turning outlet %s %s" % ( outlet, action ))
+    # create out JSON data object for the POST to the API
+    data = {"token":AuthToken,"cmd":"control","data":{"action":action}}
+    resp = post( IP, '/api/dev/' + DID + '/outlet/' + outlet, data )
+    return resp
+
+
+#------------------------------------------------------------------------------
 # Get the average wattage used by this outlet.
 def get_watts( IP, DID, outlet ):
     log.debug( "Getting wattage for outlet %s" % ( outlet ))
