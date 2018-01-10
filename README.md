@@ -9,7 +9,7 @@ sudo apt-get install -y python3
 pip install --upgrade virtualenv
 virtualenv --python python3 env
 source env/bin/activate
-pip install requests
+pip3 install requests
 ```
 - Download and run the [geist_frob.py](geist_frob.py) script.
 
