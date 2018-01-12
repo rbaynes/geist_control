@@ -29,6 +29,8 @@ def main():
                         help='IP address of strip')
     parser.add_argument('--outlet', required=True, type=str, \
                         help='Outlet number 1-4')
+    parser.add_argument('--csv', dest='csv', \
+                        action='store_true', help='output CSV: <IP>,<outlet>,<watts>')
     parser.add_argument('--debug', dest='debug', \
                         action='store_true', help='enable debug logging')
     args = parser.parse_args()
@@ -43,14 +45,23 @@ def main():
         log.fatal( "--outlet valid values are 1-4" )
     outlet = str( int( args.outlet ) - 1 )
 
-    # automatically get device ID
-    log.debug( "Getting device ID..." )
-    DID = getDID( args.IP )
-    log.debug( "DID=%s" % DID)
+    try:
+        # automatically get device ID
+        log.debug( "Getting device ID..." )
+        DID = getDID( args.IP )
+        log.debug( "DID=%s" % DID)
 
-    # finally, do what the user wants.
-    watts = get_watts( args.IP, DID, outlet )
-    print( "Outlet %s is using %s watts." % ( args.outlet, watts['data'] ))
+        # finally, do what the user wants.
+        watts = get_watts( args.IP, DID, outlet )
+        if args.csv:
+            print( "%s,%s,%s" % ( args.IP, args.outlet, watts['data'] ))
+        else:
+            print( "Strip %s Outlet %s is using %s watts." % 
+                ( args.IP, args.outlet, watts['data'] ))
+    except Exception as e:
+        #print( "ERROR: Exception: %s" % e)
+        print( "ERROR reaching %s" % args.IP )
+        exit( 1 )
 
 
 #------------------------------------------------------------------------------
