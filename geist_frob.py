@@ -49,18 +49,23 @@ def main():
         log.fatal( "--outlet valid values are 1-4" )
     args.outlet = str( int( args.outlet ) - 1 )
 
-    # automatically get device ID
-    log.debug( "Getting device ID..." )
-    DID = getDID( args.IP )
-    log.debug( "DID=%s" % DID)
+    try:
+        # automatically get device ID
+        log.debug( "Getting device ID..." )
+        DID = getDID( args.IP )
+        log.debug( "DID=%s" % DID)
 
-    # login and get auth token
-    log.debug( "Logging in to get auth token..." )
-    AuthToken = login( args.IP, args.username, args.password )
-    log.debug( "AuthToken=%s" % AuthToken)
+        # login and get auth token
+        log.debug( "Logging in to get auth token..." )
+        AuthToken = login( args.IP, args.username, args.password )
+        log.debug( "AuthToken=%s" % AuthToken)
 
-    # finally, do what the user wants.
-    outlet( args.IP, DID, AuthToken, args.outlet, args.action )
+        # finally, do what the user wants.
+        outlet( args.IP, DID, AuthToken, args.outlet, args.action )
+    except Exception as e:
+        #print( "ERROR: Exception: %s" % e)
+        print( "ERROR reaching %s" % args.IP )
+        exit( 1 )
 
 
 #------------------------------------------------------------------------------
