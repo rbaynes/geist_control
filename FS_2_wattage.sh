@@ -3,7 +3,7 @@
 # Get the current real-time wattage used by every outlet of every strip 
 # in container 3 and sum it.
 
-OUTPUT_FN="watts.csv"
+OUTPUT_FN=`date "+FS2-watts-%Y-%m-%d-%H-%M-%S-%s.csv"`
 
 # Output the wattage from all 4 outlets on a strip/IP.
 # Args: the IP address.
@@ -41,5 +41,7 @@ all_watts 172.17.2.28
 
 # Sum 
 WATTS=`cut -d , -f 3 $OUTPUT_FN | awk '{total = total + $1}END{print total}'`
-echo "Total power used by container 2 is $WATTS watts."
+TOTAL="Total power used by container 2 is $WATTS watts."
+echo $TOTAL >> $OUTPUT_FN
+echo $TOTAL
 
