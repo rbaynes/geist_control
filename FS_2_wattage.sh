@@ -10,10 +10,10 @@ OUTPUT_FN=`date "+FS2-watts-%Y-%m-%d-%H-%M-%S-%s.csv"`
 all_watts(){
   IP=$1 # IP address 
   echo "Getting wattage from $IP..."
-  geist_wattage.py --IP $IP --outlet 1 --csv >> $OUTPUT_FN
-  geist_wattage.py --IP $IP --outlet 2 --csv >> $OUTPUT_FN
-  geist_wattage.py --IP $IP --outlet 3 --csv >> $OUTPUT_FN
-  geist_wattage.py --IP $IP --outlet 4 --csv >> $OUTPUT_FN
+  ./geist_wattage.py --IP $IP --outlet 1 --csv >> $OUTPUT_FN
+  ./geist_wattage.py --IP $IP --outlet 2 --csv >> $OUTPUT_FN
+  ./geist_wattage.py --IP $IP --outlet 3 --csv >> $OUTPUT_FN
+  ./geist_wattage.py --IP $IP --outlet 4 --csv >> $OUTPUT_FN
 }
 
 # Reset the output file
