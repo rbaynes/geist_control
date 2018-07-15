@@ -3,7 +3,7 @@
 # Get the current real-time wattage used by every outlet of every strip 
 # in container 3 and sum it.
 
-OUTPUT_FN=`date "+FS2-watts-%Y-%m-%d-%H-%M-%S-%s.csv"`
+OUTPUT_FN=`date "+Geist-watts-%Y-%m-%d-%H-%M-%S-%s.csv"`
 
 # Output the wattage from all 4 outlets on a strip/IP.
 # Args: the IP address.
